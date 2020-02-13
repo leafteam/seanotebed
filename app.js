@@ -84,7 +84,7 @@ server.get("/notes", (req, res) => {
 });
 
 server.post("/savenote", (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   if (req.body.id) {
     NotesModel.findOneAndUpdate(
       { _id: req.body.id },
@@ -104,7 +104,7 @@ server.post("/savenote", (req, res) => {
       content: req.body.content
     }).save((err, data) => {
       if (err) console.log(err);
-      console.log(data);
+      // console.log(data);
     });
   }
 });
@@ -115,6 +115,15 @@ server.get("/note/:id", (req, res) => {
     if (err) console.log(err);
     // console.log(data);
     res.json(data);
+  });
+});
+
+server.delete("/deletenote/:id", (req, res) => {
+  // console.log(req.params.id);
+  NotesModel.deleteOne({ _id: req.params.id }, (err, data) => {
+    if (err) console.log(err);
+    // console.log(data);
+    res.send({ message: "sucessfully deleted" });
   });
 });
 
